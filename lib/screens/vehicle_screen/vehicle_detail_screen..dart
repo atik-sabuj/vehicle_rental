@@ -88,6 +88,15 @@ class _VehicleDetailScreenState extends State<VehicleDetailScreen> {
             Text('Type: ${_vehicle!.type}', style: const TextStyle(fontSize: 18)),
             const SizedBox(height: 8),
             Text('Status: ${_vehicle!.status}', style: const TextStyle(fontSize: 18)),
+            const SizedBox(height: 8),
+            Text('Battery: ${_vehicle!.battery}', style: const TextStyle(fontSize: 18)),
+            const SizedBox(height: 8),
+            Text('Cost per minute: ${_vehicle!.costPerMinute}', style: const TextStyle(fontSize: 18)),
+            const SizedBox(height: 8),
+            Text(
+              'Location: ${_vehicle!.location?.lat}, ${_vehicle!.location?.lng}',
+              style: const TextStyle(fontSize: 18),
+            ),
             const Spacer(),
             if (_vehicle!.status == 'available')
               SizedBox(
