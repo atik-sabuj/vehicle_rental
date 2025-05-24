@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import '../../providers/profile_provider.dart';
-
 
 class ProfileScreen extends StatefulWidget {
   final int userId;
+
   const ProfileScreen({super.key, required this.userId});
 
   @override
@@ -16,7 +15,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   void initState() {
     super.initState();
-    Provider.of<ProfileProvider>(context, listen: false).fetchProfile(widget.userId);
+    if (widget.userId > 0) {
+      Provider.of<ProfileProvider>(context, listen: false)
+          .fetchProfile(widget.userId);
+    }
   }
 
   @override
@@ -29,19 +31,55 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ? const Center(child: CircularProgressIndicator())
           : profileProvider.error != null
           ? Center(child: Text(profileProvider.error!))
-          : Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('Name: ${profileProvider.name}', style: const TextStyle(fontSize: 18)),
-            const SizedBox(height: 8),
-            Text('Email: ${profileProvider.email}', style: const TextStyle(fontSize: 18)),
-            const SizedBox(height: 8),
-            Text('Total Trips: ${profileProvider.totalTrips}', style: const TextStyle(fontSize: 18)),
-          ],
-        ),
+          : _buildProfileView(profileProvider.profile),
+    );
+  }
+
+  Widget _buildProfileView(Map<String, dynamic>? profile) {
+    if (profile == null) {
+      return const Center(child: Text('No profile data found.'));
+    }
+
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text('Name: ${profile['name'] ?? 'N/A'}',
+              style: const TextStyle(fontSize: 18)),
+          const SizedBox(height: 8),
+          Text('Email: ${profile['email'] ?? 'N/A'}',
+              style: const TextStyle(fontSize: 18)),
+          const SizedBox(height: 8),
+          Text('Total Trips: ${profile['totalTrips'] ?? 0}',
+              style: const TextStyle(fontSize: 18)),
+        ],
       ),
     );
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

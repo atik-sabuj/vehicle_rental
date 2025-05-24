@@ -14,12 +14,14 @@ class _VehicleListScreenState extends State<VehicleListScreen> {
   @override
   void initState() {
     super.initState();
+    // Fetch vehicles once on init
     Provider.of<VehicleProvider>(context, listen: false).fetchVehicles();
   }
 
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<VehicleProvider>(context);
+
     return Scaffold(
       appBar: AppBar(title: const Text('Available Vehicles')),
       body: RefreshIndicator(
@@ -35,15 +37,22 @@ class _VehicleListScreenState extends State<VehicleListScreen> {
           itemBuilder: (ctx, i) {
             final vehicle = provider.vehicles[i];
             return ListTile(
-              leading: Image.network(vehicle['image'], width: 50),
-              title: Text(vehicle['name']),
-              subtitle: Text('${vehicle['type']} - ${vehicle['status']}'),
+              leading: vehicle.image != null
+                  ? Image.network(
+                vehicle.image!,
+                width: 50,
+                height: 50,
+                fit: BoxFit.cover,
+              )
+                  : const Icon(Icons.directions_car),
+              title: Text(vehicle.name),
+              subtitle: Text('${vehicle.type} - ${vehicle.status}'),
               trailing: const Icon(Icons.arrow_forward_ios, size: 16),
               onTap: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (_) => VehicleDetailScreen(vehicleId: vehicle['id']),
+                    builder: (_) => VehicleDetailScreen(vehicleId: vehicle.id),
                   ),
                 );
               },
@@ -54,3 +63,4 @@ class _VehicleListScreenState extends State<VehicleListScreen> {
     );
   }
 }
+

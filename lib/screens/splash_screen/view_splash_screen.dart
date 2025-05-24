@@ -19,23 +19,23 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void _navigateToLogin() {
-    Timer(const Duration(seconds: 20), () {
+    Timer(const Duration(seconds: 3), () {
       Navigator.pushReplacement(
         context,
-    //    MaterialPageRoute(builder: (_) => const LoginScreen()),
-        MaterialPageRoute(builder: (_) => const VehicleListScreen()),
+       MaterialPageRoute(builder: (_) => const LoginScreen()),
+    //   MaterialPageRoute(builder: (_) => const VehicleListScreen()),
       );
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       backgroundColor: Colors.blue,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
+          children: [
             Icon(Icons.directions_bike, color: Colors.white, size: 80),
             SizedBox(height: 20),
             Text(
