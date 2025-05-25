@@ -17,7 +17,8 @@ class _MainScreenState extends State<MainScreen> {
 
   final List<Widget> _screens = [
     const VehicleListScreen(),
-    const ProfileScreen(userId: '123'),
+  //  const ProfileScreen(userId: '1'),
+    const ProfileScreen(),
   ];
 
   void _onTabTapped(int index) {
@@ -37,12 +38,17 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Vehicle Rental'),
+        title: const Text(
+          'Vehicle Rental',
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.teal,
+        iconTheme: const IconThemeData(color: Colors.white),
         actions: [
           IconButton(
             icon: const Icon(Icons.logout),
             onPressed: () => _logout(context),
-          )
+          ),
         ],
       ),
       body: _screens[_currentIndex],

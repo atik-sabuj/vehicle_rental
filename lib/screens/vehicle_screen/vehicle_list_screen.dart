@@ -25,7 +25,18 @@ class _VehicleListScreenState extends State<VehicleListScreen> {
     final provider = Provider.of<VehicleProvider>(context);
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Available Vehicles')),
+      appBar: AppBar(
+        title: const Text(
+          'Available Vehicles',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontStyle: FontStyle.italic,
+            color: Colors.black,
+          ),
+        ),
+     centerTitle: true,
+      ),
+
       body: RefreshIndicator(
         onRefresh: provider.fetchVehicles,
         child: provider.isLoading

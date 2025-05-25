@@ -74,7 +74,7 @@ class _VehicleDetailScreenState extends State<VehicleDetailScreen> {
         // content: 'Something went wrong. Please try again.',
 
         title: 'Rental Started',
-        content: 'Your rental has started successfully!',
+        content: 'Your rental has Started Successfully',
          isError: true,
       );
     }
@@ -228,11 +228,23 @@ class _VehicleDetailScreenState extends State<VehicleDetailScreen> {
               width: double.infinity,
               child: ElevatedButton.icon(
                 onPressed: _startRental,
-                icon: const Icon(Icons.play_arrow),
-                label: const Text('Start Rental'),
+                icon: const Icon(Icons.play_arrow, color: Colors.white),
+                label: const Text(
+                  'Start Rental',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                    letterSpacing: 1.0,
+                  ),
+                ),
                 style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(vertical: 16),
-                  textStyle: const TextStyle(fontSize: 16),
+                  backgroundColor: Colors.blue, // Button background color
+                  padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
+                  elevation: 4,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
                 ),
               ),
             ),
