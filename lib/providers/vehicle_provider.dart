@@ -61,11 +61,15 @@ class VehicleProvider with ChangeNotifier {
 
   Future<bool> startRental(String id) async {
     try {
-      final url = Uri.parse('$baseUrl/VehicleList/$id/rent');
+      final url = Uri.parse('$baseUrl/vehicles/$id/rent'); // updated endpoint
       final response = await http.post(url);
 
       if (response.statusCode == 200 || response.statusCode == 201) {
+        final responseBody = jsonDecode(response.body);
+        debugPrint('Rental message: ${responseBody['message']}'); // optional logging
         return true;
+      } else {
+        debugPrint('Failed to start rental. Status: ${response.statusCode}');
       }
     } catch (e) {
       debugPrint('Start rental error: $e');
